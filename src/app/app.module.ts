@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { OpenMapsComponent } from './open-maps/open-maps.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
