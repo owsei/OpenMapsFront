@@ -2,11 +2,12 @@ import { Component,Input,OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 import { icon, Marker } from 'leaflet';
+import "leaflet/dist/leaflet.css";
 
 
 
-export const DEFAULT_LAT = 48.20807;
-export const DEFAULT_LON =  16.37320;
+export const DEFAULT_LAT = 42.825183;
+export const DEFAULT_LON = -1.652176;
 export const TITULO = 'Proyecto';
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
@@ -21,15 +22,36 @@ const shadowUrl = 'assets/marker-shadow.png';
 export class OpenMapsComponent implements OnInit {
 
   private map:any;
+  private markerIcon = {
+    icon: L.icon({
+      iconSize: [25, 41],
+      iconAnchor: [10, 41],
+      popupAnchor: [2, -40],
+      // specify the path here
+      iconUrl: "https://unpkg.com/leaflet@1.5.1/dist/images/marker-icon.png",
+      shadowUrl: "https://unpkg.com/leaflet@1.5.1/dist/images/marker-shadow.png"
+    })
+  };
+
+
+  private heightMap:string="800px";
+  private withMap:string="1080px";
   @Input() lat: number = DEFAULT_LAT;
   @Input() lon: number = DEFAULT_LON;
   @Input() titulo: string = TITULO ;
 
+ 
 
   constructor() { }
 
   ngOnInit(): void {
     this.initMap();
+   
+    this.map.on("click", (e: { latlng: { lat: number; lng: number; }; }) => {
+      console.log(e.latlng); // get the coordinates
+      L.marker([e.latlng.lat, e.latlng.lng], this.markerIcon).addTo(this.map); // add the marker onclick
+    });
+
   }
 
   private initMap(): void {
@@ -71,6 +93,12 @@ export class OpenMapsComponent implements OnInit {
     const mark = L.circleMarker([this.lat, this.lon]).addTo(this.map);
     mark.addTo(this.map);
 
+
+    this.map.on("click", function() {
+
+      console.log("marcado");
+      
+    });
 
     //ruta
     // L.Routing.control({
