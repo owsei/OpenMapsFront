@@ -3,8 +3,15 @@ import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 import { icon, Marker } from 'leaflet';
 import "leaflet/dist/leaflet.css";
+import { HttpParams } from '@angular/common/http';
+import { OpenMapsService } from '../services/openmaps.service';
+import { Observable } from 'rxjs';
 
+interface puntoGPS{
+  lat: number; 
+  lng: number;
 
+}
 
 export const DEFAULT_LAT = 42.825183;
 export const DEFAULT_LON = -1.652176;
@@ -17,9 +24,11 @@ const shadowUrl = 'assets/marker-shadow.png';
 @Component({
   selector: 'app-open-maps',
   templateUrl: './open-maps.component.html',
-  styleUrls: ['./open-maps.component.css']
+  styleUrls: ['./open-maps.component.css'],
+  providers:[OpenMapsService]
 })
 export class OpenMapsComponent implements OnInit {
+
 
   private map:any;
   private markerIcon = {
@@ -33,6 +42,8 @@ export class OpenMapsComponent implements OnInit {
     })
   };
 
+  
+  private marcadores:[]=[]
 
   private heightMap:string="800px";
   private withMap:string="1080px";
@@ -42,13 +53,21 @@ export class OpenMapsComponent implements OnInit {
 
  
 
-  constructor() { }
+  constructor(private openMapsService:OpenMapsService) { }
 
   ngOnInit(): void {
     this.initMap();
    
+    this.openMapsService.getOpenMapsLines();
+
     this.map.on("click", (e: { latlng: { lat: number; lng: number; }; }) => {
+
       console.log(e.latlng); // get the coordinates
+      let params= new HttpParams()
+          .set('latitude',e.latlng.lat)
+          .set('longitude',e.latlng.lng);
+      this.openMapsService.setPoints(params);
+      
       L.marker([e.latlng.lat, e.latlng.lng], this.markerIcon).addTo(this.map); // add the marker onclick
     });
 

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { OpenMapsService } from './services/openmaps.service';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +25,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 
+/*Services*/
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +40,7 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    HttpClientModule,
     //DX
     DxTabPanelModule,
     DxFormModule,
@@ -46,7 +52,7 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
     InputTextModule,
     ButtonModule
   ],
-  providers: [],
+  providers: [OpenMapsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
