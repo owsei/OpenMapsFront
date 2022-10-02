@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OpenMapsService } from '../services/openmaps.service';
 
 @Component({
   selector: 'app-busqueda',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BusquedaComponent implements OnInit {
 
-  constructor() { }
+  lines:any[]=[];
+  selectedLine:string='';
+
+  constructor(private openMapsService:OpenMapsService) { }
+
 
   ngOnInit(): void {
+
+    this.openMapsService.getOpenMapsLines()
+      .subscribe((response:any) => {
+        this.lines = response;
+        console.log(this.lines);
+      });
+
   }
 
 }

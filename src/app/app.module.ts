@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OpenMapsService } from './services/openmaps.service';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +11,7 @@ import { AppComponent } from './app.component';
 /*Componentes*/
 import { OpenMapsComponent } from './open-maps/open-maps.component';
 import { MainPageComponent } from './main-page/main-page.component';
+import { BusquedaComponent } from './busqueda/busqueda.component';
 
 /*DX */
 import { DxTabPanelModule } from "devextreme-angular/ui/tab-panel"
@@ -23,7 +25,8 @@ import { MenuComponent } from './menu/menu.component';
 import { MenubarModule } from 'primeng/menubar';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
-import { BusquedaComponent } from './busqueda/busqueda.component';
+import {DropdownModule} from 'primeng/dropdown';
+
 
 /*Services*/
 
@@ -41,6 +44,7 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     //DX
     DxTabPanelModule,
     DxFormModule,
@@ -50,7 +54,8 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
     TabViewModule,
     MenubarModule,
     InputTextModule,
-    ButtonModule
+    ButtonModule,
+    DropdownModule
   ],
   providers: [OpenMapsService],
   bootstrap: [AppComponent]

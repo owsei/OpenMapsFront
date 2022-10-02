@@ -31,3 +31,8 @@
     padding: 15px; 
     height: 100%;
 }
+
+.busqueda{
+  height: 150px;
+  border: 2px solid black;
+}

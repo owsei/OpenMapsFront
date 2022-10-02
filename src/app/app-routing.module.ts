@@ -4,7 +4,7 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { OpenMapsComponent } from './open-maps/open-maps.component';
 
 const routes: Routes = [
-  { path: '', component: MainPageComponent },
+  { path: '**', component: MainPageComponent },
   { path: 'mainpage', component: MainPageComponent },
   { path: 'openmaps', component: OpenMapsComponent }
 ];

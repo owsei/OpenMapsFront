@@ -8,25 +8,20 @@ import { Observable } from 'rxjs';
 })
 export class OpenMapsService {
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private http:HttpClient) { }
 
 
   public setPoints(params:HttpParams){
       //console.log(params);
-      this.httpClient.put('localhost/OpenMapsBackEnd/public/setOpenMapsPoints',null,{ params: params });
+      this.http.put('localhost/OpenMapsBackEnd/public/setOpenMapsPoints',null,{ params: params });
   }
 
   public getPoints(){
-
-    return this.httpClient.get('localhost/OpenMapsBackEnd/public/setOpenMapsPoints');
-
-
+    return this.http.get('localhost/OpenMapsBackEnd/public/setOpenMapsPoints');
   }
 
-
   public getOpenMapsLines(){
-    this.httpClient.get<string>('http://localhost/OpenMapsBackEnd/public/getLines').subscribe(data => {   // data is already a JSON object
-      console.log(data);
-  })}
 
+    return  this.http.get('http://localhost/OpenMapsBackEnd/public/getLines');
+  }
 }

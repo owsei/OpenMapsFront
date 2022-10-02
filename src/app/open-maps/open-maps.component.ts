@@ -7,11 +7,6 @@ import { HttpParams } from '@angular/common/http';
 import { OpenMapsService } from '../services/openmaps.service';
 import { Observable } from 'rxjs';
 
-interface puntoGPS{
-  lat: number; 
-  lng: number;
-
-}
 
 export const DEFAULT_LAT = 42.825183;
 export const DEFAULT_LON = -1.652176;
@@ -44,6 +39,8 @@ export class OpenMapsComponent implements OnInit {
 
   
   private marcadores:[]=[]
+  public lines:any[]=[];
+  public selectedLine:any;
 
   private heightMap:string="800px";
   private withMap:string="1080px";
@@ -57,8 +54,11 @@ export class OpenMapsComponent implements OnInit {
 
   ngOnInit(): void {
     this.initMap();
-   
-    this.openMapsService.getOpenMapsLines();
+    
+    this.openMapsService.getOpenMapsLines()
+      .subscribe((response:any) => {
+        this.lines = response;
+      });
 
     this.map.on("click", (e: { latlng: { lat: number; lng: number; }; }) => {
 
@@ -73,6 +73,10 @@ export class OpenMapsComponent implements OnInit {
 
   }
 
+  public cargarLinea(){
+    
+
+  }
   private initMap(): void {
     var iconDefault = L.icon({
       iconRetinaUrl,
@@ -119,6 +123,8 @@ export class OpenMapsComponent implements OnInit {
       
     });
 
+
+   
     //ruta
     // L.Routing.control({
     //   router: L.Routing.osrmv1({
