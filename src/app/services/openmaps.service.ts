@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient,HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -12,8 +11,17 @@ export class OpenMapsService {
 
 
   public setPoints(params:HttpParams){
-      //console.log(params);
-      this.http.put('localhost/OpenMapsBackEnd/public/setOpenMapsPoints',null,{ params: params });
+      console.log(params);
+
+      this.http.post('http://localhost/OpenMapsBackEnd/public/setOpenMapsPoints',null,{ params: params })
+      .subscribe(res => { 
+        console.log('insertado');		
+      },
+      err => {
+        console.log('no insertado');
+      }
+     );
+      
   }
 
   public getPoints(){

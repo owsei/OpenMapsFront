@@ -1,8 +1,25 @@
 <p-dropdown [options]="lines" optionLabel="name" optionValue="idLine" [(ngModel)]="selectedLine" (onChange)="cargarLinea()"></p-dropdown>
 <br>
-<div class="map-container">
-    <div class="map-frame">
-      <div id="map">
-      </div>
-    </div>
-  </div>
+<div>
+  <table>
+    <tr>
+      <td style="width: 1600px;"> 
+        <div class="map-container">
+        <div class="map-frame">
+          <div id="map">
+          </div>
+        </div>
+      </div></td>
+      <td>
+        <div class ="puntosGPS">
+          <h2>Puntos</h2>
+          <div class="p-field-checkbox" *ngIf="selectedPoints.length>0">
+            <p-checkbox *ngFor="let point of selectedPoints" name="group1" value="point.name" [(ngModel)]="selectedPoints" inputId="point.name"></p-checkbox>
+            <label for="point.name">point.name</label>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+

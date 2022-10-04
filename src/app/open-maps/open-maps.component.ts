@@ -5,7 +5,8 @@ import { icon, Marker } from 'leaflet';
 import "leaflet/dist/leaflet.css";
 import { HttpParams } from '@angular/common/http';
 import { OpenMapsService } from '../services/openmaps.service';
-import { Observable } from 'rxjs';
+import {MessageService} from 'primeng/api';
+import { PrimeNGConfig } from 'primeng/api';
 
 
 export const DEFAULT_LAT = 42.825183;
@@ -40,7 +41,9 @@ export class OpenMapsComponent implements OnInit {
   
   private marcadores:[]=[]
   public lines:any[]=[];
-  public selectedLine:any;
+  public selectedLine:number=1;
+
+  selectedPoints: string[] = [];
 
   private heightMap:string="800px";
   private withMap:string="1080px";
@@ -53,6 +56,7 @@ export class OpenMapsComponent implements OnInit {
   constructor(private openMapsService:OpenMapsService) { }
 
   ngOnInit(): void {
+    
     this.initMap();
     
     this.openMapsService.getOpenMapsLines()
@@ -64,8 +68,10 @@ export class OpenMapsComponent implements OnInit {
 
       console.log(e.latlng); // get the coordinates
       let params= new HttpParams()
+          .set('idLine',this.selectedLine)
           .set('latitude',e.latlng.lat)
           .set('longitude',e.latlng.lng);
+      console.log("mando a servicio");
       this.openMapsService.setPoints(params);
       
       L.marker([e.latlng.lat, e.latlng.lng], this.markerIcon).addTo(this.map); // add the marker onclick
@@ -123,22 +129,6 @@ export class OpenMapsComponent implements OnInit {
       
     });
 
-
-   
-    //ruta
-    // L.Routing.control({
-    //   router: L.Routing.osrmv1({
-    //     serviceUrl: `https://router.project-osrm.org/route/v1/`
-    //   }),
-    //   showAlternatives: true,
-    //   fitSelectedRoutes: false,
-    //   show: false,
-    //   routeWhileDragging: true,
-    //   waypoints: [
-    //     L.latLng(this.lat, this.lon),
-    //     L.latLng(lat, lon)
-    //   ]
-    // }).addTo(this.map);
     
   }
 }

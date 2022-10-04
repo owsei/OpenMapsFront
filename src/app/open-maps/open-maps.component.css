@@ -16,3 +16,13 @@
   height: 750px;
   border: 1px solid black;
 }
+
+
+.puntosGPS{
+  border: 1px solid black;
+  display: flex;
+  vertical-align: top;
+  height: 800px;
+  width: 200px;
+
+}
