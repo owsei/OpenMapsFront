@@ -13,9 +13,11 @@
       <td>
         <div class ="puntosGPS">
           <h2>Puntos</h2>
-          <div class="p-field-checkbox" *ngIf="selectedPoints.length>0">
-            <p-checkbox *ngFor="let point of selectedPoints" name="group1" value="point.name" [(ngModel)]="selectedPoints" inputId="point.name"></p-checkbox>
-            <label for="point.name">point.name</label>
+          <div class="p-field-checkbox" *ngIf="selectedPoints.length>0" >
+            Cantidad:{{selectedPoints.length}}
+           <div *ngFor="let sp of selectedPoints;let i = index">
+                [{{sp[1]}},{{sp[1]}}],
+            </div> 
           </div>
         </div>
       </td>

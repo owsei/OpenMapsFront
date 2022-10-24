@@ -9,16 +9,19 @@ export class OpenMapsService {
 
   constructor(private http:HttpClient) { }
 
+  
 
   public setPoints(params:HttpParams){
       console.log(params);
 
       this.http.post('http://localhost/OpenMapsBackEnd/public/setOpenMapsPoints',null,{ params: params })
       .subscribe(res => { 
-        console.log('insertado');		
+        console.log('insertado');	
+        return 'insertado';	
       },
       err => {
         console.log('no insertado');
+        return 'no insertado';	
       }
      );
       

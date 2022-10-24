@@ -20,9 +20,9 @@
 
 .puntosGPS{
   border: 1px solid black;
-  display: flex;
+  display: block;
   vertical-align: top;
   height: 800px;
-  width: 200px;
+  width: 300px;
 
 }
